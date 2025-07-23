@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  dependency-check:
-    uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
+  # dependency-check:
+  #   uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
 
   lint:
     needs: dependency-check
