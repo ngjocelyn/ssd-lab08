@@ -23,8 +23,8 @@ jobs:
         uses: sibiraj-s/action-eslint@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          eslint-args: "--quiet"
+          eslint-args: "--ignore-path=.gitignore --quiet"
+          ignore-path: .eslintignore
           extensions: "js,jsx,ts,tsx"
           annotations: true
-          all-files: true
           package-manager: npm
