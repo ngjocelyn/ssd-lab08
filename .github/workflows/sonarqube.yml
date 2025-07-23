@@ -28,6 +28,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=ssd-lab08
+            -Dsonar.sources=.
 
       - name: Check Quality Gate
         uses: sonarsource/sonarqube-quality-gate-action@master
