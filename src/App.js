@@ -65,6 +65,8 @@ class App extends Component {
       searchTerm: prevState.searchTerm.trim(),
     }));
 
+    console.log(searchTerm);
+
     // Validate for XSS attack
     if (validateXSS(searchTerm)) {
       this.setState({
