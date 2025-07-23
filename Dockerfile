@@ -41,8 +41,17 @@ CMD ["sh", "-c", "npm install && npm start"]
 # Stage 3: Production environment
 FROM nginx:alpine AS production
 
+# Create non-root user
+RUN adduser -D myuser
+
 # Copy the production build artifacts from the build stage
 COPY --from=build /app/build /usr/share/nginx/html
+
+# Change ownership
+RUN chown -R myuser:myuser /usr/share/nginx/html
+
+# Switch to non-root user
+USER myuser
 
 # Expose the default NGINX port
 EXPOSE 80

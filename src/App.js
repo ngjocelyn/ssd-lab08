@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import DOMPurify from "dompurify";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -28,7 +27,7 @@ const validateSQLInjection = (input) => {
     /\bUNION\b\s+\bSELECT\b/i, // UNION SELECT
     /(--|#|\/\*)/, // SQL comments
     /['"`]\s*(OR|AND)\s+['"`]?\d+=\d+/i, // ' OR '1'='1'
-    /["';]{1,10}.*?(DROP|DELETE|INSERT|UPDATE)/i, // SQL + dangerous command chaining
+    /["';]\s*\b(DROP|DELETE|INSERT|UPDATE)\b/i, // SQL + dangerous command chaining
     /\b(WAITFOR|DELAY)\b/gi,
     /\bEXEC(\s+|\()/i, // EXEC() or EXEC cmd
   ];
@@ -98,7 +97,7 @@ class App extends Component {
     );
     this.setState(
       {
-        validatedTerm: searchTerm,
+        validatedTerm: trimmed,
         currentPage: "results",
         searchTerm: "",
         error: "",
