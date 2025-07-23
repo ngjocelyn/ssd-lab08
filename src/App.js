@@ -60,6 +60,7 @@ class App extends Component {
     console.log("Search term:", this.state.searchTerm);
     // const { searchTerm } = this.state;
     // const searchTerm = this.state.searchTerm.trim();
+    // const searchTerm = this.state.searchTerm;
     this.setState((prevState) => ({
       searchTerm: prevState.searchTerm.trim(),
     }));
@@ -115,7 +116,7 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to React5</h1>
+        <h1 className="App-title">Welcome to React6</h1>
       </header>
       {/* <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
