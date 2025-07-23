@@ -28,7 +28,7 @@ const validateSQLInjection = (input) => {
     /\bUNION\b\s+\bSELECT\b/i, // UNION SELECT
     /(--|#|\/\*)/, // SQL comments
     /['"`]\s*(OR|AND)\s+['"`]?\d+=\d+/i, // ' OR '1'='1'
-    /(['";])+.*(DROP|DELETE|INSERT|UPDATE)/i, // SQL + dangerous command chaining
+    /["';]{1,10}.*?(DROP|DELETE|INSERT|UPDATE)/i, // SQL + dangerous command chaining
     /\b(WAITFOR|DELAY)\b/gi,
     /\bEXEC(\s+|\()/i, // EXEC() or EXEC cmd
   ];
@@ -59,7 +59,10 @@ class App extends Component {
     e.preventDefault();
     console.log("Search term:", this.state.searchTerm);
     // const { searchTerm } = this.state;
-    const searchTerm = this.state.searchTerm.trim();
+    // const searchTerm = this.state.searchTerm.trim();
+    this.setState((prevState) => ({
+      searchTerm: prevState.searchTerm.trim(),
+    }));
 
     // Validate for XSS attack
     if (validateXSS(searchTerm)) {

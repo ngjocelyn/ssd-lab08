@@ -4,10 +4,12 @@ WORKDIR /app
 
 # Leverage caching by installing dependencies first
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --ignore-scripts
 
 # Copy the rest of the application code and build for production
-COPY . ./
+# COPY . ./
+COPY src/ ./src
+COPY public/ ./public
 RUN npm run build
 
 # Stage 2: Development environment
@@ -19,10 +21,12 @@ RUN apk add --no-cache git
 
 # Install dependencies again for development
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --ignore-scripts
 
 # Copy the full source code
-COPY . ./
+# COPY . ./
+COPY src/ ./src
+COPY public/ ./public
 
 # Git identity setup 
 RUN git config --global user.name "Ng Min Yuan Jocelyn" && \
