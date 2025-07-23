@@ -2,12 +2,12 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  ci: 
+  ci:
     name: CI Pipeline
     runs-on: ubuntu-latest
 
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm ci
@@ -28,14 +28,21 @@ jobs:
         with:
           project: "MyReactApp"
           path: "./"
-          format: "ALL"
+          format: "HTML"
+          out: "dependency-check-report"
+
+      - name: Upload Dependency Check Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dependency-Check-Report
+          path: dependency-check-report
 
       # Lint JavaScript
       - name: Run ESLint
         uses: sibiraj-s/action-eslint@v4
         with:
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
+          eslint-args: "--ignore-path=.gitignore --quiet"
+          extensions: "js,jsx,ts,tsx"
           annotations: true
 
       # Start App in Background
