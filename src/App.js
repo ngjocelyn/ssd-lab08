@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 import logo from "./logo.svg";
 import "./App.css";
 

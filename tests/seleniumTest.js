@@ -18,7 +18,7 @@ const chrome = require("selenium-webdriver/chrome");
     await driver.get("http://localhost:3000");
 
     // Wait until the title contains "React" (customize to your actual title)
-    await driver.wait(until.titleContains("React"), 10004);
+    await driver.wait(until.titleContains("React"), 10005);
 
     // Optional: check for some element on screen
     let header = await driver.findElement(By.css("h1")).getText();
