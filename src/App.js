@@ -58,12 +58,6 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log("Search term:", this.state.searchTerm);
-    // const { searchTerm } = this.state;
-    // const searchTerm = this.state.searchTerm.trim();
-    // const searchTerm = this.state.searchTerm;
-    // this.setState((prevState) => ({
-    //   searchTerm: prevState.searchTerm.trim(),
-    // }));
 
     const rawTerm = this.state.searchTerm;
     const trimmed = rawTerm.trim();
@@ -119,11 +113,11 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to React6</h1>
+        <h1 className="App-title">Welcome to React</h1>
       </header>
-      {/* <p className="App-intro">
+      <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
-      </p> */}
+      </p>
       <form onSubmit={this.handleSubmit}>
         <input
           type="text"
@@ -151,37 +145,12 @@ class App extends Component {
 
       <p className="App-intro">
         You searched for: <strong>{this.state.validatedTerm}</strong>{" "}
-        {/* escapes dangerous input in JSX. */}
       </p>
       <button onClick={this.handleReturn} style={{ padding: "8px 16px" }}>
         Return to Home
       </button>
     </div>
   );
-
-  // renderResultsPage = () => {
-  //   return (
-  //     <div className="App">
-  //       <header className="App-header">
-  //         <img src={logo} className="App-logo" alt="logo" />
-  //         <h1 className="App-title">Search Results</h1>
-  //       </header>
-
-  //       <p className="App-intro">
-  //         You searched for:
-  //         <div
-  //           dangerouslySetInnerHTML={{
-  //             // __html: this.state.validatedTerm,
-  //             __html: DOMPurify.sanitize(this.state.validatedTerm),
-  //           }}
-  //         />
-  //       </p>
-  //       <button onClick={this.handleReturn} style={{ padding: "8px 16px" }}>
-  //         Return to Home
-  //       </button>
-  //     </div>
-  //   );
-  // };
 
   handleReturn = () => {
     this.setState({
