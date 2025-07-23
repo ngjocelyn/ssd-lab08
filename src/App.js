@@ -68,8 +68,6 @@ class App extends Component {
     const rawTerm = this.state.searchTerm;
     const trimmed = rawTerm.trim();
 
-    // console.log(searchTerm);
-
     // Validate for XSS attack
     if (validateXSS(trimmed)) {
       this.setState({
