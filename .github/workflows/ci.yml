@@ -11,7 +11,7 @@ jobs:
   #   uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
 
   lint:
-    needs: dependency-check
+    # needs: dependency-check
     uses: ngjocelyn/ssd-lab08/.github/workflows/lint.yml@main
 
   tests:
