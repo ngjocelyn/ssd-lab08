@@ -61,14 +61,17 @@ class App extends Component {
     // const { searchTerm } = this.state;
     // const searchTerm = this.state.searchTerm.trim();
     // const searchTerm = this.state.searchTerm;
-    this.setState((prevState) => ({
-      searchTerm: prevState.searchTerm.trim(),
-    }));
+    // this.setState((prevState) => ({
+    //   searchTerm: prevState.searchTerm.trim(),
+    // }));
 
-    console.log(searchTerm);
+    const rawTerm = this.state.searchTerm;
+    const trimmed = rawTerm.trim();
+
+    // console.log(searchTerm);
 
     // Validate for XSS attack
-    if (validateXSS(searchTerm)) {
+    if (validateXSS(trimmed)) {
       this.setState({
         error:
           "Invalid input detected: Potential XSS attack prevented. Please try again.",
@@ -79,7 +82,7 @@ class App extends Component {
     }
 
     // Validate for SQL injection
-    if (validateSQLInjection(searchTerm)) {
+    if (validateSQLInjection(trimmed)) {
       this.setState({
         error:
           "Invalid input detected: Potential SQL injection attack prevented Please try again.",
@@ -91,7 +94,7 @@ class App extends Component {
 
     // Navigate to results page
     this.setState({
-      validatedTerm: encodeHTML(searchTerm),
+      validatedTerm: encodeHTML(trimmed),
       // validatedTerm: searchTerm, // Use raw input for simplicity
       currentPage: "results",
       searchTerm: "",
