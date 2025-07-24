@@ -10,14 +10,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "18"
-
-      # - name: Install dependencies
-      #   run: npm ci
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -29,9 +21,3 @@ jobs:
       - name: Run CodeQL Analysis
         id: codeql-analysis
         uses: github/codeql-action/analyze@v3
-
-      # - name: Upload CodeQL results # Add this new step
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with:
-      #     sarif_file: ${{ steps.codeql-analysis.outputs.sarif }}
-      #     token: ${{ secrets.CODEQL_TOKEN }}
