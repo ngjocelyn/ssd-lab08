@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   dependency-check:
     uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
@@ -22,9 +18,8 @@ jobs:
     needs: dependency-check
     uses: ./.github/workflows/codeql.yml
     permissions:
-      actions: read
-      packages: read
-      security-events: write
+      contents: read
+      pull-requests: write
 
   tests:
     needs: [lint, codeql]
