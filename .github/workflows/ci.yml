@@ -9,10 +9,14 @@ on:
 jobs:
   dependency-check:
     uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
+    permissions:
+      contents: read
 
   lint:
     needs: dependency-check
     uses: ngjocelyn/ssd-lab08/.github/workflows/lint.yml@main
+    permissions:
+      contents: read
 
   codeql:
     needs: dependency-check
