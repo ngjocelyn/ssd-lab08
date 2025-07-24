@@ -1,23 +1,12 @@
 import React, { Component } from "react";
+import DOMPurify from "dompurify"; // For XSS sanitization
 import logo from "./logo.svg";
 import "./App.css";
 
 // XSS validation - detects common XSS patterns
 const validateXSS = (input) => {
-  const xssPatterns = [
-    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    /javascript:/gi,
-    /on\w+\s*=/gi,
-    /<iframe/gi,
-    /<object/gi,
-    /<embed/gi,
-    /<link/gi,
-    /<meta/gi,
-    /vbscript:/gi,
-    /expression\s*\(/gi,
-  ];
-
-  return xssPatterns.some((pattern) => pattern.test(input));
+  const sanitizedInput = DOMPurify.sanitize(input);
+  return sanitizedInput !== input; // Returns true if input was modified
 };
 
 // SQL injection validation - detects common SQL injection patterns
