@@ -16,7 +16,7 @@ jobs:
 
   codeql:
     needs: dependency-check
-    uses: ./.github/workflows/code-ql.yml
+    uses: ./.github/workflows/codeql.yml
 
   tests:
     needs: [lint, codeql]
