@@ -1,10 +1,10 @@
-name: Dependency Check
+name: Lint and Static Analysis
 
 on:
   workflow_call:
 
 jobs:
-  security-scan:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,3 +30,9 @@ jobs:
           extensions: "js,jsx,ts,tsx"
           annotations: true
           package-manager: npm
+
+      # - name: Upload SARIF to GitHub Security
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   if: always()
+      #   with:
+      #     sarif_file: reports/eslint-results.sarif

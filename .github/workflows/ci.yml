@@ -14,6 +14,10 @@ jobs:
     needs: dependency-check
     uses: ngjocelyn/ssd-lab08/.github/workflows/lint.yml@main
 
+  codeql:
+    needs: dependency-check
+    uses: ./.github/workflows/code-ql.yml
+
   tests:
-    needs: lint
+    needs: [lint, codeql]
     uses: ngjocelyn/ssd-lab08/.github/workflows/test.yml@main

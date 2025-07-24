@@ -1,0 +1,30 @@
+name: Static Analysis
+
+on:
+  workflow_call:
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "18"
+
+      # - name: Install dependencies
+      #   run: npm ci
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2 # ← Different action from same repo
+        with:
+          languages: javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v2 # ← Another action from same repo
