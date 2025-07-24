@@ -37,6 +37,9 @@ class App extends Component {
     currentPage: "home",
     error: "",
     validatedTerm: "",
+    isLoggedIn: false,
+    username: "",
+    password: "",
   };
 
   handleChange = (e) => {
@@ -97,6 +100,40 @@ class App extends Component {
     );
   };
 
+  // Login form handlers
+  handleUsernameChange = (e) => {
+    this.setState({ username: e.target.value });
+  };
+
+  handlePasswordChange = (e) => {
+    this.setState({ password: e.target.value });
+  };
+
+  handleLoginSubmit = (e) => {
+    e.preventDefault();
+
+    const { username, password } = this.state;
+
+    if (!username.trim() || !password.trim()) {
+      this.setState({
+        error: "Username and password must be entered.",
+      });
+      return;
+    }
+    // Simulate successful login
+    this.setState({ isLoggedIn: true, currentPage: "profile", error: "" });
+  };
+
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      username: "",
+      password: "",
+      currentPage: "home",
+      error: "",
+    });
+  };
+
   renderHomePage = () => (
     <div className="App">
       <header className="App-header">
@@ -106,6 +143,8 @@ class App extends Component {
       <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
+
+      {/* Search Form */}
       <form onSubmit={this.handleSubmit}>
         <input
           type="text"
@@ -116,9 +155,42 @@ class App extends Component {
         <button type="submit">Search</button>
       </form>
 
-      {this.state.error && (
-        <div style={{ color: "red", marginBottom: "10px" }}>
+      {/* Global Error Message */}
+      {this.state.currentPage === "home" && this.state.error && (
+        <div style={{ color: "red", marginTop: "10px" }}>
           {this.state.error}
+        </div>
+      )}
+
+      {/* Login Form */}
+      {!this.state.isLoggedIn ? (
+        <form onSubmit={this.handleLoginSubmit} style={{ marginTop: "20px" }}>
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleUsernameChange}
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      ) : (
+        <div style={{ marginTop: "20px" }}>
+          <p>
+            Welcome, <strong>{this.state.username}</strong>!
+          </p>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
       )}
     </div>
@@ -140,6 +212,30 @@ class App extends Component {
     </div>
   );
 
+  renderProfilePage = () => (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="App-title">User Profile</h1>
+      </header>
+
+      {this.state.isLoggedIn ? (
+        <div className="App-intro">
+          <p>
+            <strong>Username:</strong> {this.state.username}
+          </p>
+          <p>
+            <strong>Password:</strong> {this.state.password}
+          </p>
+          {/* <button onClick={this.handleReturn}>Back to Home</button> */}
+          <button onClick={this.handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <p className="App-intro">You must be logged in to view this page.</p>
+      )}
+    </div>
+  );
+
   handleReturn = () => {
     this.setState({
       currentPage: "home",
@@ -156,7 +252,9 @@ class App extends Component {
       <div className="App">
         {currentPage === "home"
           ? this.renderHomePage()
-          : this.renderResultsPage()}
+          : currentPage === "results"
+          ? this.renderResultsPage()
+          : this.renderProfilePage()}
       </div>
     );
   }
