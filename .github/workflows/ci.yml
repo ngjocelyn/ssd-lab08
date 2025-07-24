@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   dependency-check:
     uses: ngjocelyn/ssd-lab08/.github/workflows/dependency-check.yml@main
