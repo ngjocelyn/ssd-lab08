@@ -21,6 +21,10 @@ jobs:
   codeql:
     needs: dependency-check
     uses: ./.github/workflows/codeql.yml
+    permissions:
+      actions: read
+      packages: read
+      security-events: write
 
   tests:
     needs: [lint, codeql]
