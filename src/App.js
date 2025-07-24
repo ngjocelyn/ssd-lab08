@@ -248,15 +248,16 @@ class App extends Component {
   render() {
     const { currentPage } = this.state;
 
-    return (
-      <div className="App">
-        {currentPage === "home"
-          ? this.renderHomePage()
-          : currentPage === "results"
-          ? this.renderResultsPage()
-          : this.renderProfilePage()}
-      </div>
-    );
+    let content;
+    if (currentPage === "home") {
+      content = this.renderHomePage();
+    } else if (currentPage === "results") {
+      content = this.renderResultsPage();
+    } else {
+      content = this.renderProfilePage();
+    }
+
+    return <div className="App">{content}</div>;
   }
 }
 
