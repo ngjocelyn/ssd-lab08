@@ -261,4 +261,6 @@ class App extends Component {
   }
 }
 
+export { validateXSS, validateSQLInjection };
+export { encodeHTML };
 export default App;

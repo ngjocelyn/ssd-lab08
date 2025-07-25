@@ -32,7 +32,6 @@ COPY public/ ./public
 RUN git config --global user.name "Ng Min Yuan Jocelyn" && \
     git config --global user.email "2301930@sit.singaporetech.edu.sg"
 
-
 # Expose port for the development server
 EXPOSE 3000
 # CMD ["npm", "start"]
