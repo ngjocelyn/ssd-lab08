@@ -7,7 +7,7 @@ import "./App.css";
 const validateXSS = (input) => {
   const sanitizedInput = DOMPurify.sanitize(input);
   const dangerousPattern =
-    /(javascript:|<script.*?>.*?<\/script>|<iframe.*?>.*?<\/iframe>)/gi;
+    /(javascript:|<script\b[^>]*>[\s\S]*?<\/script>|<iframe\b[^>]*>[\s\S]*?<\/iframe>)/gi;
   return sanitizedInput !== input || dangerousPattern.test(input);
 };
 
