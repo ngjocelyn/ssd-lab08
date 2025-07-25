@@ -6,7 +6,9 @@ import "./App.css";
 // XSS validation - detects common XSS patterns
 const validateXSS = (input) => {
   const sanitizedInput = DOMPurify.sanitize(input);
-  return sanitizedInput !== input; // Returns true if input was modified
+  const dangerousPattern =
+    /(javascript:|<script.*?>.*?<\/script>|<iframe.*?>.*?<\/iframe>)/gi;
+  return sanitizedInput !== input || dangerousPattern.test(input);
 };
 
 // SQL injection validation - detects common SQL injection patterns
